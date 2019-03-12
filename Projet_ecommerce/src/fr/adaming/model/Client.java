@@ -21,9 +21,10 @@ public class Client implements Serializable {
 	@Column(name = "id_cl")
 	private int idClient;
 	private String nomClient;
-	private List<String> adresse;
 	private String email;
 	private String tel;
+	
+	private Adresse adresse;
 
 	@OneToMany(mappedBy="client") 
 	private List<Commande> listeco;
@@ -32,29 +33,25 @@ public class Client implements Serializable {
 	public Client() {
 		super();
 	}
-	
-	public Client(String nomClient, List<String> adresse, String email, String tel, List<Commande> listeco) {
+
+	public Client(String nomClient, String email, String tel, Adresse adresse, List<Commande> listeco) {
 		super();
 		this.nomClient = nomClient;
-		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.adresse = adresse;
 		this.listeco = listeco;
 	}
 
-	public Client(int idClient, String nomClient, List<String> adresse, String email, String tel,
-			List<Commande> listeco) {
+	public Client(int idClient, String nomClient, String email, String tel, Adresse adresse, List<Commande> listeco) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
-		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.adresse = adresse;
 		this.listeco = listeco;
 	}
-
-
-	// Déclaration des getters et setters
 
 	public int getIdClient() {
 		return idClient;
@@ -72,7 +69,6 @@ public class Client implements Serializable {
 		this.nomClient = nomClient;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
@@ -89,6 +85,14 @@ public class Client implements Serializable {
 		this.tel = tel;
 	}
 
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
 	public List<Commande> getListeco() {
 		return listeco;
 	}
@@ -96,24 +100,14 @@ public class Client implements Serializable {
 	public void setListeco(List<Commande> listeco) {
 		this.listeco = listeco;
 	}
-	
 
-	public List<String> getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(List<String> adresse) {
-		this.adresse = adresse;
-	}
-
-	// To String
 	@Override
 	public String toString() {
-		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email=" + email
-				+ ", tel=" + tel + ", listeco=" + listeco + "]";
+		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", email=" + email + ", tel=" + tel
+				+ ", adresse=" + adresse + ", listeco=" + listeco + "]";
 	}
-
-
+	
+	
 
 
 }
