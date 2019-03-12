@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateful
@@ -14,11 +15,6 @@ public class ProduitServiceImpl implements IProduitService{
 	//Transformation de l'asso UML en JAVA
 	@EJB
 	IProduitDao pDao;
-
-	@Override
-	public Produit ajoutPro(Produit p) {
-		return pDao.ajoutPro(p);
-	}
 
 	@Override
 	public int supprPro(Produit p) {
@@ -43,6 +39,28 @@ public class ProduitServiceImpl implements IProduitService{
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public Produit ajoutPro(Produit p, Categorie c) {
+		//Lier les objets en Java
+		p.setCategorie(c);
+		return pDao.ajoutPro(p, c);
+	}
+
+	@Override
+	public List<Produit> recProByMC(String mc) {
+		return pDao.recProByMC(mc);
+	}
+
+	@Override
+	public List<Produit> recProByCat(Categorie c) {
+		return pDao.recProByCat(c);
+	}
+
+	@Override
+	public List<Produit> recProSelect() {
+		return pDao.recProSelect();
 	}
 
 }

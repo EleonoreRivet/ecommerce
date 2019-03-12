@@ -1,15 +1,18 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Administrateur;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
@@ -23,6 +26,7 @@ public class ProduitManagedBean  implements Serializable{
 	
 	// Déclaration des attributs
 	private Produit produit;
+	private Categorie categorie;
 	private Administrateur admin; 
 	private boolean indice;
 	
@@ -31,6 +35,7 @@ public class ProduitManagedBean  implements Serializable{
     // Constructeur vide
 	public ProduitManagedBean() {
 		this.produit= new Produit(); 
+		this.categorie = new Categorie(); 
 		this.indice=false;
 	}
 
@@ -56,6 +61,32 @@ public class ProduitManagedBean  implements Serializable{
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.admin= (Administrateur) maSession.getAttribute("adminSession");
 	}
+	
+	
+	//Méthodes métiers
+	public String ajoutPro() {
+		//appel de la méthode service
+		Produit pAjout=pService.ajoutPro(produit, categorie);
+		
+		if(pAjout.getId()!=0) { // eAjout ne sera JAMAIS nul
+			
+			
+			//Récup de la nouvelle liste
+			List<Produit> listePro=pService.recPro();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("pSession", listePro);
+			
+			return "espaceadmin"; 
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
+			return "espaceadmin";
+		}
+		
+	}
+	
 	
 	
 }

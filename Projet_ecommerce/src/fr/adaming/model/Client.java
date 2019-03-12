@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,36 +23,39 @@ public class Client implements Serializable {
 	@Column(name = "id_cl")
 	private int id;
 	private String nom;
-	private String[] adresse; 
 	private String email;
 	private String tel;
 	
-
+	//Transformation de l'association UML en JAVA
+	@OneToOne(mappedBy="client")
+	private Adresse adresse; 
+	
 	@OneToMany(mappedBy="client") 
 	private List<Commande> listeco;
+	
 
 	// Déclaration des constructeurs
 	public Client() {
 		super();
 	}
-
-	public Client(String nom, String[] adresse, String email, String tel) {
+	
+	public Client(String nom, String email, String tel, Adresse adresse) {
 		super();
 		this.nom = nom;
-		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.adresse = adresse;
 	}
 
-	public Client(int id, String nom, String[] adresse, String email, String tel) {
+	public Client(int id, String nom, String email, String tel, Adresse adresse) {
 		super();
 		this.id = id;
 		this.nom = nom;
-		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.adresse = adresse;
 	}
-	
+
 	// Getters et Setters
 
 	public int getId() {
@@ -68,14 +72,6 @@ public class Client implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String[] getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String[] adresse) {
-		this.adresse = adresse;
 	}
 
 	public String getEmail() {
@@ -102,11 +98,19 @@ public class Client implements Serializable {
 		this.listeco = listeco;
 	}
 
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+
 	// To String
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", nom=" + nom + ", adresse=" + Arrays.toString(adresse) + ", email=" + email
-				+ ", tel=" + tel + "]";
+		return "Client [id=" + id + ", nom=" + nom + ", email=" + email + ", tel=" + tel + ", adresse=" + adresse + "]";
 	}
 
 

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateless
@@ -17,7 +17,8 @@ public class ProduitDaoImpl implements IProduitDao{
 	private  EntityManager em;
 	
 	@Override
-	public Produit ajoutPro(Produit p) {
+	public Produit ajoutPro(Produit p, Categorie c) {
+		p.setCategorie(c);
 		em.persist(p);
 		return p;
 	}
@@ -72,6 +73,45 @@ public class ProduitDaoImpl implements IProduitDao{
 	public Produit recProById(Produit p) {
 		Produit pOut = em.find(Produit.class, p.getId());
 		return pOut;
+	}
+
+	@Override
+	public List<Produit> recProByMC(String mc) {
+		// Requête JPQL
+		String req="SELECT p FROM Produit as p WHERE p.description LIKE :pX OR p.designation LIKE :pX"; 
+		
+		//Récupérer un objet de type Query
+		Query query=em.createQuery(req);
+
+		// Paramètres
+		query.setParameter("pX", "%"+mc+"%");
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Produit> recProByCat(Categorie c) {
+		// Requête JPQL
+		String req = "SELECT p FROM Produit as p WHERE p.categorie.id=:pIdc";
+		
+		//Récupérer un objet de type Query
+		Query query=em.createQuery(req);		
+		
+		//Passage des paramètres
+		query.setParameter("pIdc", c.getId());
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Produit> recProSelect() {
+		// Requête JPQL
+		String req = "SELECT p FROM Produit as p WHERE p.selectionne=true";
+		
+		//Récupérer un objet de type Query
+		Query query=em.createQuery(req);		
+		
+		return query.getResultList();
 	}
 
 }
