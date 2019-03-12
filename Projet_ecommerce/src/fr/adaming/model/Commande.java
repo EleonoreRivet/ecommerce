@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "commandes")
-public class Commande implements Serializable {
+public class Commande implements Serializable { 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_co")

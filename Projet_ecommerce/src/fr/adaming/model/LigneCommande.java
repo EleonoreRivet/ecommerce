@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name="lignes_commandes")
 public class LigneCommande implements Serializable{
 	 
-	// Déclaration des attributs
+	// Déclaration des attributs 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_l")

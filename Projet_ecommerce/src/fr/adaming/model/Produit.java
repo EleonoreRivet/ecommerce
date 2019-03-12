@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="produits")
-public class Produit implements Serializable {
+public class Produit implements Serializable { 
 	
 	//Déclaration des attributs
 	@Id

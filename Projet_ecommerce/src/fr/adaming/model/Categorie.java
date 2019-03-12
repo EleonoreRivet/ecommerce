@@ -60,7 +60,7 @@ public class Categorie implements Serializable{
 	public void setNomCategorie(String nomCategorie) {
 		this.nomCategorie = nomCategorie;
 	}
-	public byte[] getPhoto() {
+	public byte[] getPhoto() { 
 		return photo;
 	}
 	public void setPhoto(byte[] photo) {
