@@ -20,8 +20,8 @@ public class Categorie implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_cat")
-	private int idCategorie;
-	private String nomCategorie;
+	private int id;
+	private String nom;
 	private byte[] photo; 
 	private String description;
 	
@@ -33,32 +33,32 @@ public class Categorie implements Serializable{
 	public Categorie() {
 		super();
 	}
-	public Categorie(String nomCategorie, byte[] photo, String description) {
+	public Categorie(String nom, byte[] photo, String description) {
 		super();
-		this.nomCategorie = nomCategorie;
+		this.nom = nom;
 		this.photo = photo;
 		this.description = description;
 	}
-	public Categorie(int idCategorie, String nomCategorie, byte[] photo, String description) {
+	public Categorie(int id, String nom, byte[] photo, String description) {
 		super();
-		this.idCategorie = idCategorie;
-		this.nomCategorie = nomCategorie;
+		this.id = id;
+		this.nom = nom;
 		this.photo = photo;
 		this.description = description;
 	}
 	
 	// Déclaration des getters et setters
-	public int getIdCategorie() {
-		return idCategorie;
+	public int getId() {
+		return id;
 	}
-	public void setIdCategorie(int idCategorie) {
-		this.idCategorie = idCategorie;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getNomCategorie() {
-		return nomCategorie;
+	public String getNom() {
+		return nom;
 	}
-	public void setNomCategorie(String nomCategorie) {
-		this.nomCategorie = nomCategorie;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	public byte[] getPhoto() { 
 		return photo;
@@ -83,7 +83,7 @@ public class Categorie implements Serializable{
 	//To String
 	@Override
 	public String toString() {
-		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo="
+		return "Categorie [id=" + id + ", nom=" + nom + ", photo="
 				+ Arrays.toString(photo) + ", description=" + description + "]";
 	}
 	

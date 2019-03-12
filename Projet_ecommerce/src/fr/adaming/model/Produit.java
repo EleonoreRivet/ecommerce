@@ -22,7 +22,7 @@ public class Produit implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_p")
-	private int idProduit; 
+	private int id; 
 	
 	private String designation;
 	private String description;
@@ -52,25 +52,26 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
-	}
-	public Produit(int idProduit, String designation, String description, double prix, int quantite,
-			boolean selectionne, byte[] photo) {
+	}	
+	public Produit(int id, String designation, String description, double prix, int quantite, boolean selectionne,
+			byte[] photo, Categorie categorie, List<LigneCommande> listelico) {
 		super();
-		this.idProduit = idProduit;
+		this.id = id;
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.categorie = categorie;
+		this.listelico = listelico;
 	}
-	
 	// Déclaration des Getters et Setters 
-	public int getIdProduit() {
-		return idProduit;
+	public int getId() {
+		return id;
 	}
-	public void setIdProduit(int idProduit) {
-		this.idProduit = idProduit;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getDesignation() {
 		return designation;
@@ -124,7 +125,7 @@ public class Produit implements Serializable {
 	// To String
 	@Override
 	public String toString() {
-		return "Produit [idProduit=" + idProduit + ", designation=" + designation + ", description=" + description
+		return "Produit [id=" + id + ", designation=" + designation + ", description=" + description
 				+ ", prix=" + prix + ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo="
 				+ Arrays.toString(photo) + "]";
 	} 

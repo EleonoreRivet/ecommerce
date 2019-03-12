@@ -14,38 +14,47 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clients")
 public class Client implements Serializable {
+	
+	//Déclaration des attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cl")
 	private int idClient;
 	private String nomClient;
-	private String adresse;
+	private List<String> adresse;
 	private String email;
 	private String tel;
 
 	@OneToMany(mappedBy="client") 
 	private List<Commande> listeco;
 
+	// Déclaration des constructeurs
 	public Client() {
 		super();
 	}
-
-	public Client(String nomClient, String adresse, String email, String tel) {
+	
+	public Client(String nomClient, List<String> adresse, String email, String tel, List<Commande> listeco) {
 		super();
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.listeco = listeco;
 	}
 
-	public Client(int idClient, String nomClient, String adresse, String email, String tel) {
+	public Client(int idClient, String nomClient, List<String> adresse, String email, String tel,
+			List<Commande> listeco) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.listeco = listeco;
 	}
+
+
+	// Déclaration des getters et setters
 
 	public int getIdClient() {
 		return idClient;
@@ -63,13 +72,6 @@ public class Client implements Serializable {
 		this.nomClient = nomClient;
 	}
 
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
 
 	public String getEmail() {
 		return email;
@@ -94,11 +96,24 @@ public class Client implements Serializable {
 	public void setListeco(List<Commande> listeco) {
 		this.listeco = listeco;
 	}
+	
 
+	public List<String> getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(List<String> adresse) {
+		this.adresse = adresse;
+	}
+
+	// To String
 	@Override
 	public String toString() {
 		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email=" + email
 				+ ", tel=" + tel + ", listeco=" + listeco + "]";
 	}
+
+
+
 
 }
