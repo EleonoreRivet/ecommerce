@@ -22,7 +22,7 @@ public class Commande implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_co")
-	private int id;
+	private int id; 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 

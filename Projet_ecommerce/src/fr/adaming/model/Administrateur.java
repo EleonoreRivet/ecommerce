@@ -17,7 +17,7 @@ public class Administrateur implements Serializable {
 	@Column(name = "id_a")
 	private int id;
 	private String username;
-	private String mdp;
+	private String mdp;  
 
 	public Administrateur() {
 		super();

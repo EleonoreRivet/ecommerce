@@ -3,7 +3,7 @@ package fr.adaming.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Panier implements Serializable{
+public class Panier implements Serializable{ 
 	private List<LigneCommande> listelico;
 
 	public Panier() {

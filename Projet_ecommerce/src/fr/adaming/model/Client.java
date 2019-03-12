@@ -23,7 +23,7 @@ public class Client implements Serializable {
 	private String email;
 	private String tel;
 
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client") 
 	private List<Commande> listeco;
 
 	public Client() {
