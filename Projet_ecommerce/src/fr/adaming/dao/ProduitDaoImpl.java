@@ -74,12 +74,15 @@ public class ProduitDaoImpl implements IProduitDao{
 			p.setImg("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
 		}
 		
-		return listePro ;
+		return listePro;
 	}
 
 	@Override
 	public Produit recProById(Produit p) {
 		Produit pOut = em.find(Produit.class, p.getId());
+		
+		p.setImg("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
+		
 		return pOut;
 	}
 
