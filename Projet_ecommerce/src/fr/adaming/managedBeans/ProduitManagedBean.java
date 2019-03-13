@@ -110,14 +110,18 @@ public class ProduitManagedBean  implements Serializable{
 			
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("pSession", listePro);
+			
+			return "espaceadmin";
 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
 			
+			return "ajoutadmin";
+			
 		}
-		return "espaceadmin";
+		
 		
 	}
 	
