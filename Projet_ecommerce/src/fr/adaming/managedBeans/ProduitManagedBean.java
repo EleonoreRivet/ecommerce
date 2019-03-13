@@ -68,7 +68,7 @@ public class ProduitManagedBean  implements Serializable{
 		//appel de la méthode service
 		Produit pAjout=pService.ajoutPro(produit, categorie);
 		
-		if(pAjout.getId()!=0) { // eAjout ne sera JAMAIS nul
+		if(pAjout.getId()!=0) { // pAjout ne sera JAMAIS nul
 			
 			
 			//Récup de la nouvelle liste
@@ -86,6 +86,67 @@ public class ProduitManagedBean  implements Serializable{
 		}
 		
 	}
+	
+	public String modifPro() {
+		//appel de la méthode service
+		int verif=pService.modifPro(produit);
+		if(verif!=0) {
+			
+			//Récup de la nouvelle liste
+			List<Produit> listePro=pService.recPro();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("pSession", listePro);
+			
+			return "espaceadmin"; 
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification a échoué"));
+			return "espaceadmin";
+		}	
+	}
+	
+	public String supprPro() {
+		//appel de la méthode service
+		int verif=pService.supprPro(produit);
+		if(verif!=0) {
+			
+			//Récup de la nouvelle liste
+			List<Produit> listePro=pService.recPro();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("pSession", listePro);
+			
+			return "espaceadmin"; 
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué"));
+			return "espaceadmin";
+		}	
+	}
+	
+	public String recProById() {
+		//appel de la méthode service
+		Produit pOut=pService.recProById(produit);
+		if(pOut!=null) {
+			this.produit=pOut; 
+			this.indice=true;
+			return "recherche";
+		
+		}else {
+			
+			this.indice=false;
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
+			return "recherche";
+		}
+	}
+	
+	
+	
+	
 	
 	
 	
