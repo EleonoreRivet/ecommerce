@@ -1,29 +1,30 @@
 package fr.adaming.model;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="adresses")
+
+@Embeddable 
+@Access(AccessType.FIELD)
 public class Adresse {
 	// Attributs
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_ad")
-	private int id;
+
+	@Column(name="id_num")
+	private int numero;
 	private String rue;
 	private String ville;
 	private String codePostal;
 	
 	//Transformation de l'association UML en JAVA
-	@OneToOne
-	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
+//	@OneToOne
+//	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
 	private Client client; 
 	
 	// Constructeurs
@@ -36,23 +37,25 @@ public class Adresse {
 		this.ville = ville;
 		this.codePostal = codePostal;
 	}
-	public Adresse(int id, String rue, String ville, String codePostal) {
+	
+	public Adresse(int numero, String rue, String ville, String codePostal, Client client) {
 		super();
-		this.id = id;
+		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;
 		this.codePostal = codePostal;
+		this.client = client;
 	}
-	
 	// Getters et Setters
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getRue() {
 		return rue;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 	public void setRue(String rue) {
 		this.rue = rue;
@@ -78,13 +81,13 @@ public class Adresse {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	
 	// To String
 	@Override
 	public String toString() {
-		return "Adresse [id=" + id + ", rue=" + rue + ", ville=" + ville + ", codePostal=" + codePostal + "]";
+		return "Adresse [numero=" + numero + ", rue=" + rue + ", ville=" + ville + ", codePostal=" + codePostal
+				+ ", client=" + client + "]";
 	}
-	
-	
 
 
 }

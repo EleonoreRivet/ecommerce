@@ -38,7 +38,7 @@
 		<div class="ui-g-12 ui-md-6">
 			<h2 style="text-align: center">Ajouter une catégorie</h2>
 			<p:messages />
-			<h:form>
+			<h:form enctype="multipart/form-data">
 				<h:panelGrid columns="3" styleClass="panelGridCenter">
 					<p:outputLabel value="Nom:" />
 					<h:inputText value="#{cMB.categorie.nom}" required="true" />
@@ -47,7 +47,7 @@
 					<h:inputText value="#{cMB.categorie.description}" required="true" />
 					<br />
 					<p:outputLabel value="Photo:" />
-					<p:fileUpload value="#{cMB.produit.photo}" mode="simple"
+					<p:fileUpload value="#{cMB.image}" mode="simple"
 						skinSimple="true" />
 					<br />
 					<br />

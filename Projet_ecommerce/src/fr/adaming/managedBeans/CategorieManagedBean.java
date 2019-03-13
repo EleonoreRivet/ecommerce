@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Administrateur;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -29,6 +31,7 @@ public class CategorieManagedBean implements Serializable{
 	private Categorie categorie;
 	private Administrateur admin; 
 	private boolean indice;
+	private UploadedFile image; 
 	
     private HttpSession maSession;
 
@@ -72,6 +75,19 @@ public class CategorieManagedBean implements Serializable{
 		this.indice = indice;
 	}
 	
+	
+	public UploadedFile getImage() {
+		return image;
+	}
+
+	public void setImage(UploadedFile image) {
+		this.image = image;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -80,6 +96,10 @@ public class CategorieManagedBean implements Serializable{
     
 	// Méthodes métiers
 	public String ajoutCat() {
+		if(this.image!=null){
+			this.categorie.setPhoto(this.image.getContents());
+		}
+		
 		//appel de la méthode service
 		Categorie cAjout=cService.ajoutCat(categorie);
 		

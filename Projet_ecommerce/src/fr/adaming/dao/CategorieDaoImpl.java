@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
@@ -60,8 +62,14 @@ public class CategorieDaoImpl implements ICategorieDao{
 		
 		//Récupérer un objet de type Query
 		Query query=em.createQuery(req);
+		
+		List<Categorie> listeCat = query.getResultList();
 
-		return query.getResultList();
+		for(Categorie c:listeCat){
+			c.setImg("data:image/png;base64,"+Base64.encodeBase64String(c.getPhoto()));
+		}
+		
+		return listeCat;
 	}
 
 	@Override

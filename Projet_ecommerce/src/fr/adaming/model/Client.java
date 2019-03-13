@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,9 @@ public class Client implements Serializable {
 	private String tel;
 	
 	//Transformation de l'association UML en JAVA
-	@OneToOne(mappedBy="client")
-	private Adresse adresse; 
+	//Lier l'adresse au client
+	@Embedded
+	private Adresse adresse; //Il ne faudra pas oublier de SET l'adresse au client dans le DAO !
 	
 	@OneToMany(mappedBy="client") 
 	private List<Commande> listeco;
