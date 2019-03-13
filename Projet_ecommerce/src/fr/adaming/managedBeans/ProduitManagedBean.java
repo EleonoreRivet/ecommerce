@@ -55,6 +55,23 @@ public class ProduitManagedBean  implements Serializable{
 	public void setIndice(boolean indice) {
 		this.indice = indice;
 	}
+	
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Administrateur getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administrateur admin) {
+		this.admin = admin;
+	}
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){

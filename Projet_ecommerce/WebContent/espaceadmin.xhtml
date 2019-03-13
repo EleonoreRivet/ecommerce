@@ -76,7 +76,7 @@
 <h:inputText value="#{pMB.produit.quantite}" />
 		<br />
 		<p:outputLabel value="Photo:" />
- <h:inputText value="#{pMB.produit.photo}" />
+ <p:fileUpload value="#{pMB.produit.photo}" mode="simple" skinSimple="true"/>
 		<br /><br />
 		<h:commandButton value="Ajouter un produit" action="#{pMB.ajoutPro}" styleClass="bouton"/>
 	</h:panelGrid>
