@@ -44,7 +44,7 @@ public class CategorieManagedBean implements Serializable{
 		return produit;
 	}
 
-	public void setProduit(Produit produit) {
+	public void setCatduit(Produit produit) {
 		this.produit = produit;
 	}
 
@@ -101,6 +101,67 @@ public class CategorieManagedBean implements Serializable{
 		}
 		
 	}
+	
+	public String modifCat() {
+		//appel de la méthode service
+		int verif= cService.modifCat(categorie);
+		if(verif!=0) {
+			
+			//Récup de la nouvelle liste
+			List<Categorie> listeCat=cService.recCat();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("cSession", listeCat);
+			
+			return "espaceadmin"; 
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification a échoué"));
+			return "espaceadmin";
+		}	
+	}
+	
+	public String supprCat() {
+		//appel de la méthode service
+		int verif=cService.supprCat(categorie);
+		if(verif!=0) {
+			
+			//Récup de la nouvelle liste
+			List<Categorie> listeCat=cService.recCat();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("cSession", listeCat);
+			
+			return "espaceadmin"; 
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué"));
+			return "espaceadmin";
+		}	
+	}
+	
+	public String recCatById() {
+		//appel de la méthode service
+		Categorie cOut=cService.recCatById(categorie);
+		if(cOut!=null) {
+			this.categorie=cOut; 
+			this.indice=true;
+			return "recherche";
+		
+		}else {
+			
+			this.indice=false;
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie n'a pas été trouvé"));
+			return "recherche";
+		}
+	}
+	
+	
+	
+	
 	
 	
     

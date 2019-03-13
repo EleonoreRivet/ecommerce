@@ -66,8 +66,11 @@
 	<p:outputLabel value="Description:" />
  <h:inputText value="#{pMB.produit.description}" required="true"/>
 		<br />
-		<p:outputLabel value="Categorie:" />
- <h:inputText value="#{pMB.produit.categorie}" />
+				<p:outputLabel value="Categorie:" />
+		      <p:selectOneMenu id="categorie" value="#{pMB.categorie.id}" style="width:125px">
+            <f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+           <f:selectItems value="#{sessionScope.cSession}" var="c" itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}"/>
+        </p:selectOneMenu>
 		<br />
 		<p:outputLabel value="Prix:" />
  <h:inputText value="#{pMB.produit.prix}" />
