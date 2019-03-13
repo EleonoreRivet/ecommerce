@@ -142,6 +142,10 @@ public class CategorieManagedBean implements Serializable{
 		}	
 	}
 	
+	public void modifAuto() {
+		 this.categorie=cService.recCatById(categorie); 
+	}
+	
 	public String supprCat() {
 		//appel de la méthode service
 		int verif=cService.supprCat(categorie);

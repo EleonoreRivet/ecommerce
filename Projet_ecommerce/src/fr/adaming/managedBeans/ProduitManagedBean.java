@@ -145,6 +145,10 @@ public class ProduitManagedBean  implements Serializable{
 		}	
 	}
 	
+	public void modifAuto() {
+		 this.produit=pService.recProById(produit); 
+	}
+	
 	public String supprPro() {
 		//appel de la méthode service
 		int verif=pService.supprPro(produit);

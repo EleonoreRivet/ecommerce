@@ -65,7 +65,7 @@
 					</p:column>
 
 					<p:column headerText="Photo">
-						<h:outputText value="#{c.photo}" />
+						<h:graphicImage value="#{c.img}" />
 					</p:column>
 
 					<p:column headerText="Nom">
@@ -79,12 +79,12 @@
 					<p:column headerText="Opérations">
 						<p:commandLink value="Supprimer" action="#{cMB.supprCat}"
 							update="idTab">
-							<f:setPropertyActionListener value="#{p.id}"
-								target="#{pMB.produit.id}" />
+							<f:setPropertyActionListener value="#{c.id}"
+								target="#{cMB.categorie.id}" />
 						</p:commandLink> | 
-				<p:commandLink value="Modifier" action="modif">
-							<f:setPropertyActionListener value="#{e}"
-								target="#{eMB.etudiant}" />
+				<p:commandLink value="Modifier" action="modifCat">
+							<f:setPropertyActionListener value="#{c}"
+								target="#{cMB.categorie}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>
@@ -128,9 +128,9 @@
 							<f:setPropertyActionListener value="#{p.id}"
 								target="#{pMB.produit.id}" />
 						</p:commandLink> | 
-				<p:commandLink value="Modifier" action="modif">
-							<f:setPropertyActionListener value="#{e}"
-								target="#{eMB.etudiant}" />
+				<p:commandLink value="Modifier" action="modifPro">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{pMB.produit}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>
