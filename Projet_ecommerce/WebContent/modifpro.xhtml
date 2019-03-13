@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+<title>Modifier Produits</title>
+</h:head>
+<h:body>
+
+			<h2 style="text-align: center">Modifier un produit</h2>
+			<p:messages />
+			<h:form id="idForm" enctype="multipart/form-data">
+				<h:panelGrid columns="2" styleClass="panelGridCenter">
+				
+						        <p:outputLabel for="produit" value="ID:" />
+        <p:selectOneMenu id="produit" value="#{pMB.produit.id}" style="width:125px">
+        <p:ajax event="valueChange" listener="#{pMB.modifAuto}" update="idForm"/>
+            <f:selectItem itemLabel="Selectionner un produit" itemValue="" />
+           <f:selectItems value="#{sessionScope.pSession}" var="p" itemValue="#{p.id}" itemLabel="#{p.id}.Produit #{p.designation}"/>
+        </p:selectOneMenu>
+					<p:outputLabel value="Designation:" />
+					<h:inputText value="#{pMB.produit.designation}" required="true" />
+					<br />
+					<p:outputLabel value="Description:" />
+					<h:inputText value="#{pMB.produit.description}" required="true" />
+					<br />
+					<p:outputLabel value="Categorie:" />
+					<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
+						style="width:125px">
+						<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+				    		<f:selectItems value="#{sessionScope.cSession}" var="c"
+							itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
+					</p:selectOneMenu>
+					<br />
+					<p:outputLabel value="Prix:" />
+					<h:inputText value="#{pMB.produit.prix}" />
+					<br />
+					<p:outputLabel value="Quantité:" />
+					<h:inputText value="#{pMB.produit.quantite}" />
+					<br />
+					<p:outputLabel value="Photo:" />
+					<p:fileUpload value="#{pMB.image}" mode="simple" skinSimple="true" />
+					<br />
+					<br />
+					<h:commandButton value="Modifier un produit"
+						action="#{pMB.modifPro}" styleClass="bouton" />
+				</h:panelGrid>
+			</h:form>
+
+</h:body>
+</html>

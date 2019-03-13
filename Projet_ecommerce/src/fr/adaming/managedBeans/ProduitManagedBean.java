@@ -39,6 +39,7 @@ public class ProduitManagedBean  implements Serializable{
 	public ProduitManagedBean() {
 		this.produit= new Produit(); 
 		this.categorie = new Categorie(); 
+		this.produit.setCategorie(categorie);
 		this.indice=false;
 	}
 
