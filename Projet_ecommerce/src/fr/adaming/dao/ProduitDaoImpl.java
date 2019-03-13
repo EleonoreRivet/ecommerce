@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
@@ -18,7 +20,7 @@ public class ProduitDaoImpl implements IProduitDao{
 	
 	@Override
 	public Produit ajoutPro(Produit p, Categorie c) {
-		p.setCategorie(c);
+	
 		em.persist(p);
 		return p;
 	}
@@ -66,7 +68,13 @@ public class ProduitDaoImpl implements IProduitDao{
 		//Récupérer un objet de type Query
 		Query query=em.createQuery(req);
 
-		return query.getResultList();
+		List<Produit> listePro = query.getResultList();
+		
+		for(Produit p:listePro){
+			p.setImg("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
+		}
+		
+		return listePro ;
 	}
 
 	@Override

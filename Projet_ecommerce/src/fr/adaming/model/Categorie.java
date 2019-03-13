@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ public class Categorie implements Serializable{
 	@Column(name="id_cat")
 	private int id;
 	private String nom;
+	@Lob
 	private byte[] photo; 
 	private String description;
 	

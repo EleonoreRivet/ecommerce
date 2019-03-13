@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Administrateur;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -29,6 +31,7 @@ public class ProduitManagedBean  implements Serializable{
 	private Categorie categorie;
 	private Administrateur admin; 
 	private boolean indice;
+	private UploadedFile image; 
 	
     private HttpSession maSession;
 
@@ -73,6 +76,16 @@ public class ProduitManagedBean  implements Serializable{
 		this.admin = admin;
 	}
 
+	
+	
+	public UploadedFile getImage() {
+		return image;
+	}
+
+	public void setImage(UploadedFile image) {
+		this.image = image;
+	}
+
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -82,6 +95,10 @@ public class ProduitManagedBean  implements Serializable{
 	
 	//Méthodes métiers
 	public String ajoutPro() {
+		if(this.image!=null){
+			this.produit.setPhoto(this.image.getContents());
+		}
+		
 		//appel de la méthode service
 		Produit pAjout=pService.ajoutPro(produit, categorie);
 		
@@ -93,14 +110,14 @@ public class ProduitManagedBean  implements Serializable{
 			
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("pSession", listePro);
-			
-			return "espaceadmin"; 
+
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
-			return "espaceadmin";
+			
 		}
+		return "espaceadmin";
 		
 	}
 	
