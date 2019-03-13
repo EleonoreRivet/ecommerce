@@ -82,7 +82,55 @@
 	</h:panelGrid>
 	</h:form>
 	
+			<h1 style="color: red; text-align: center">Ajouter une catégorie</h1>
+	 <p:messages />
+	<h:form>
+<h:panelGrid columns="3" styleClass="panelGridCenter">
+<p:outputLabel value="Nom:" />
+ <h:inputText value="#{cMB.categorie.nom}" required="true"/>
+		<br />
+	<p:outputLabel value="Description:" />
+ <h:inputText value="#{cMB.categorie.description}" required="true"/>
+		<br />
+		<p:outputLabel value="Photo:" />
+ <p:fileUpload value="#{cMB.categorie.photo}" mode="simple" skinSimple="true"/>
+		<br /><br />
+		<h:commandButton value="Ajouter une catégorie" action="#{cMB.ajoutCat}" styleClass="bouton"/>
+	</h:panelGrid>
+	</h:form>
 	
+	
+		<h1 style="color: red; text-align: center">Liste des catégories</h1>
+	<h:form>
+		<p:dataTable var="c" value="#{sessionScope.cSession}" id="idTab">
+			<p:column headerText="ID">
+				<h:outputText value="#{c.id}" />
+			</p:column>
+
+			<p:column headerText="Photo">
+				<h:outputText value="#{c.photo}" />
+			</p:column>
+
+			<p:column headerText="Nom">
+				<h:outputText value="#{c.nom}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{c.description}" />
+			</p:column>
+			
+			<p:column headerText="Opérations">
+				<p:commandLink value="Supprimer" action="#{cMB.supprCat}" update="idTab">
+					<f:setPropertyActionListener value="#{p.id}"
+						target="#{pMB.produit.id}" />
+				</p:commandLink> | 
+				<p:commandLink value="Modifier" action="modif">
+					<f:setPropertyActionListener value="#{e}"
+						target="#{eMB.etudiant}" />
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 
 
 </h:body>
