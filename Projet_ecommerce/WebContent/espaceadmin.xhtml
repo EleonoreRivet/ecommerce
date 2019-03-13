@@ -9,9 +9,9 @@
 <h:head>
 	<title>Espace Admin</title>
 	
+
 </h:head>
 <h:body>
-
 <style type="text/css">
 .ui-sticky {
 	top: 70px !important;
@@ -28,25 +28,29 @@
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-6">
 				<h2 style="text-align: center">Categories</h2>
-				<h:commandButton value="Ajouter" action="ajoutadmin"
-					styleClass="bouton" />
+				<f:facet name="left">
+					<h:commandButton value="Ajouter" action="ajoutadmin"
+						styleClass="bouton" />
 
-				<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+					<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+				</f:facet>
 			</div>
 
 			<div class="ui-g-12 ui-md-6">
 				<h2 style="text-align: center">Produits</h2>
-				<h:commandButton value="Ajouter" action="ajoutadmin"
-					styleClass="bouton" />
+				<f:facet name="left">
+					<h:commandButton value="Ajouter" action="ajoutadmin"
+						styleClass="bouton" />
 
-				<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+					<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
 
-				<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
-					style="width:125px">
-					<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
-					<f:selectItems value="#{sessionScope.cSession}" var="c"
-						itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
-				</p:selectOneMenu>
+					<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
+						style="width:125px">
+						<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+						<f:selectItems value="#{sessionScope.cSession}" var="c"
+							itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
+					</p:selectOneMenu>
+				</f:facet>
 			</div>
 		</div>
 	</p:toolbar>
