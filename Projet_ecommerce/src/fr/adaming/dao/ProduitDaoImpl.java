@@ -78,13 +78,13 @@ public class ProduitDaoImpl implements IProduitDao{
 	@Override
 	public List<Produit> recProByMC(String mc) {
 		// Requête JPQL
-		String req="SELECT p FROM Produit as p WHERE p.description LIKE :pX OR p.designation LIKE :pX"; 
+		String req="SELECT p FROM Produit as p WHERE p.description LIKE :pMC OR p.designation LIKE :pMC"; 
 		
 		//Récupérer un objet de type Query
 		Query query=em.createQuery(req);
 
 		// Paramètres
-		query.setParameter("pX", "%"+mc+"%");
+		query.setParameter("pMC", "%"+mc+"%");
 		
 		return query.getResultList();
 	}
