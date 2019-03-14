@@ -44,7 +44,7 @@
 					<h:inputText value="#{cMB.categorie.nom}" required="true" />
 					<br />
 					<p:outputLabel value="Description:" />
-					<h:inputText value="#{cMB.categorie.description}" required="true" />
+					<h:inputTextarea rows="3" cols="25" value="#{cMB.categorie.description}" required="true" />
 					<br />
 					<p:outputLabel value="Photo:" />
 					<p:fileUpload value="#{cMB.image}" mode="simple"
@@ -66,7 +66,7 @@
 					<h:inputText value="#{pMB.produit.designation}" required="true" />
 					<br />
 					<p:outputLabel value="Description:" />
-					<h:inputText value="#{pMB.produit.description}" required="true" />
+					<h:inputTextarea rows="3" cols="25" value="#{pMB.produit.description}" required="true" />
 					<br />
 					<p:outputLabel value="Categorie:" />
 					<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
