@@ -14,7 +14,7 @@ public class PanierServiceImpl implements IPanierService{
 	List<LigneCommande> articles = new ArrayList<LigneCommande>();
 	
 	@Override
-	public Produit ajoutProduit(Produit p, int quantite) {
+	public int ajoutProduit(Produit p, int quantite) {
 		LigneCommande lc = articles.get(p.getId());
 		if(lc==null){
 			LigneCommande lcOut = new LigneCommande();
@@ -25,7 +25,7 @@ public class PanierServiceImpl implements IPanierService{
 		}else{
 			lc.setQuantite(lc.getQuantite()+quantite);
 		}
-		return p;
+		return lc.getIdLigne();
 	}
 
 	@Override

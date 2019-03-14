@@ -94,6 +94,8 @@ public class ProduitManagedBean  implements Serializable{
 	public void setProdFiltre(List<Produit> prodFiltre) {
 		this.prodFiltre = prodFiltre;
 	}
+	
+
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){

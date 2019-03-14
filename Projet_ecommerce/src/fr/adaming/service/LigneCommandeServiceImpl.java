@@ -1,5 +1,7 @@
 package fr.adaming.service;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
@@ -16,6 +18,11 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	@Override
 	public LigneCommande ajoutProduit(Produit p, int qte) {
 		return lcDao.ajoutProduit(p, qte);
+	}
+
+	@Override
+	public List<LigneCommande> getListeCo() {
+		return lcDao.getListeCo();
 	}
 
 }

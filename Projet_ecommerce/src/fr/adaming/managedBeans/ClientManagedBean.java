@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.dao.ILigneCommandeDao;
-import fr.adaming.model.Administrateur;
 import fr.adaming.model.Adresse;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -21,6 +20,7 @@ import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.IPanierService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="clMB")
 @SessionScoped
@@ -33,6 +33,8 @@ public class ClientManagedBean implements Serializable {
 	ICommandeService comService;
 	@EJB
 	IPanierService panService; 
+	@EJB
+	IProduitService pService;
 	
 	// Déclaration des attributs
 	private Client client;
@@ -42,6 +44,8 @@ public class ClientManagedBean implements Serializable {
 	private LigneCommande ligneco;
 	private Produit produit;
 	private int quantite;
+	private List<LigneCommande> listeLico;
+	private List<Produit> listePro;
 	
     private HttpSession maSession;
 	
@@ -93,6 +97,42 @@ public class ClientManagedBean implements Serializable {
 		this.adresse = adresse;
 	} 
 	
+	
+	
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public List<LigneCommande> getListeLico() {
+		return listeLico;
+	}
+
+	public void setListeLico(List<LigneCommande> listeLico) {
+		this.listeLico = listeLico;
+	}
+
+	
+	
+	public List<Produit> getListePro() {
+		return listePro;
+	}
+
+	public void setListePro(List<Produit> listePro) {
+		this.listePro = listePro;
+	}
+
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -100,13 +140,74 @@ public class ClientManagedBean implements Serializable {
 	}
 	
 	// Méthodes métiers 
-	public String ajoutPro(){
-		Produit pAjout = panService.ajoutProduit(produit, quantite);
-		return null;
-		// EN COURS
+	public String ajoutProduit(){
+		int verif = panService.ajoutProduit(produit, quantite);
+	if(verif!=0) { 
+			//Récup de la nouvelle liste
+			List<LigneCommande> listeLico=liService.getListeCo();
+			
+			//Mettre à jour la liste dans la session
+			maSession.setAttribute("clientSession", listeLico);
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout est un succès"));
+			
+			
+			return "espaceadmin";
+
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
+			
+			return "ajoutadmin";
+			
+		}
 		
 	}
 	
+//	public String supprProduit(){
+//		int verif = panService.supprProduit(produit);
+//	if(verif!=0) { 
+//			//Récup de la nouvelle liste
+//			List<LigneCommande> listeLico=liService.getListeCo();
+//			
+//			//Mettre à jour la liste dans la session
+//			maSession.setAttribute("clientSession", listeLico);
+//			
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression est un succès"));
+//			
+//			
+//			return "espaceadmin";
+//
+//		}else {
+//			
+//			//Ajouter un message d'erreur
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué"));
+//			
+//			return "ajoutadmin";
+//			
+//		}
+//		
+//	}
+	
+	public String enregistrerCo(){
+		Commande comOut = comService.enregistrerCom(panier, client, adresse);
+	if(comOut.getId()!=0) { 
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La commande est enregistrée"));
+
+			return "espaceadmin";
+
+		}else {
+			
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La commande a échoué"));
+			
+			return "ajoutadmin";
+			
+		}
+		
+		
+	}
 	
 	
 	

@@ -7,11 +7,57 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 <h:head>
-<title>Insert title here</title>
+<title>Panier</title>
 </h:head>
 <h:body>
+<a href="testaccueil.xhtml">Accueil test</a>
+<br/>
 
+	<h3>Cart Info</h3>
+					<h:form>
+				<p:dataTable var="li" value="#{panMB.listeLico}" id="idTab">
+					<p:column headerText="ID">
+						<h:outputText value="#{li.produit.id}" />
+					</p:column>
 
+					<p:column headerText="Photo">
+						<h:graphicImage value="#{li.produit.img}" />
+					</p:column>
 
+					<p:column headerText="Designation">
+						<h:outputText value="#{li.produit.designation}" />
+					</p:column>
+
+					<p:column headerText="Description">
+						<h:outputText value="#{li.produit.description}" />
+					</p:column>
+
+					<p:column headerText="Catégorie">
+						<h:outputText value="#{li.produit.categorie.nom}" />
+					</p:column>
+
+					<p:column headerText="Prix">
+						<h:outputText value="#{li.prix}" />
+					</p:column>
+
+					<p:column headerText="Quantité">
+						<h:outputText value="#{li.quantite}" />
+					</p:column>
+
+					<p:column headerText="Opérations">
+						<p:commandLink value="Supprimer"
+							update="idTab">
+							<f:setPropertyActionListener value="#{p.id}"
+								target="#{pMB.produit.id}" />
+						</p:commandLink> | 
+				<p:commandLink value="Modifier" action="modifpro">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{pMB.produit}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+		<br></br>
+		<h:commandLink value="Continue Shopping" action="#{clMB.enregistrerCo}"></h:commandLink>
+	</h:form>
 </h:body>
 </html>
