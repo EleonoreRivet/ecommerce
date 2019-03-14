@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "commandes")
 public class Commande implements Serializable { 
+	
+	//Déclaration des attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_co")
@@ -33,6 +35,7 @@ public class Commande implements Serializable {
 	@OneToMany(mappedBy="commande")
 	private List<LigneCommande> listelico;
 
+	// Constructeurs
 	public Commande() {
 		super();
 	}
@@ -48,6 +51,7 @@ public class Commande implements Serializable {
 		this.date = date;
 	}
 
+	// Getters et Setters
 	public int getId() {
 		return id;
 	}
@@ -79,6 +83,8 @@ public class Commande implements Serializable {
 	public void setListelico(List<LigneCommande> listelico) {
 		this.listelico = listelico;
 	}
+	
+	// To String
 
 	@Override
 	public String toString() {
