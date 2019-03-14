@@ -25,7 +25,7 @@ public class Adresse {
 	//Transformation de l'association UML en JAVA
 //	@OneToOne
 //	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
-	private Client client; 
+//	private Client client; 
 	
 	// Constructeurs
 	public Adresse() {
@@ -38,13 +38,12 @@ public class Adresse {
 		this.codePostal = codePostal;
 	}
 	
-	public Adresse(int numero, String rue, String ville, String codePostal, Client client) {
+	public Adresse(int numero, String rue, String ville, String codePostal) {
 		super();
 		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;
 		this.codePostal = codePostal;
-		this.client = client;
 	}
 	// Getters et Setters
 	
@@ -74,19 +73,11 @@ public class Adresse {
 	}
 	
 	
-	
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	
 	// To String
 	@Override
 	public String toString() {
 		return "Adresse [numero=" + numero + ", rue=" + rue + ", ville=" + ville + ", codePostal=" + codePostal
-				+ ", client=" + client + "]";
+				+  "]";
 	}
 
 

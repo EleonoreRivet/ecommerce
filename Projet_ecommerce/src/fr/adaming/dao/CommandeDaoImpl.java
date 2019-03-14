@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.adaming.model.Adresse;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.Panier;
@@ -14,8 +15,9 @@ public class CommandeDaoImpl implements ICommandeDao{
 	private  EntityManager em;
 
 	@Override
-	public Commande enregistrerCom(Panier pan, Client c) {
+	public Commande enregistrerCom(Panier pan, Client c, Adresse a) {
 		// Enregistrer le client
+		c.setAdresse(a);
 		em.persist(c);
 		
 		// Enregistrer la commande

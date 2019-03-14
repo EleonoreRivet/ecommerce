@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ICommandeDao;
+import fr.adaming.model.Adresse;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.Panier;
@@ -16,8 +17,8 @@ public class CommandeServiceImpl implements ICommandeService{
 	ICommandeDao comDao;
 
 	@Override
-	public Commande enregistrerCom(Panier pan, Client c) {
-		return comDao.enregistrerCom(pan, c);
+	public Commande enregistrerCom(Panier pan, Client c, Adresse a) {
+		return comDao.enregistrerCom(pan, c, a);
 	} 
 	
 }
