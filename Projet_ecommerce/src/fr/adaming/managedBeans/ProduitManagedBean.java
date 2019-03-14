@@ -176,14 +176,14 @@ public class ProduitManagedBean  implements Serializable{
 		if(pOut!=null) {
 			this.produit=pOut; 
 			this.indice=true;
-			return "recherche";
+			return "recherchepro";
 		
 		}else {
 			
 			this.indice=false;
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
-			return "recherche";
+			return "recherchepro";
 		}
 	}
 	

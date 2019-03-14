@@ -59,7 +59,7 @@ public class AministrateurManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cSession", listeCat);
 			
 			//Mettre l'admin dans la session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("aSession", aOut);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
 			
 			return "espaceadmin";
 		} else {
@@ -69,4 +69,19 @@ public class AministrateurManagedBean implements Serializable {
 		}
 	}
 
+	public String seDeconnecter() {
+		Administrateur aOut = aService.existe(administrateur);
+
+		if (aOut != null) {
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			
+			return "login";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Impossible de se déconnecter"));
+			return "espaceadmin";
+
+		}
+	
+	
+	}	
 }
