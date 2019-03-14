@@ -34,6 +34,8 @@ public class ProduitManagedBean  implements Serializable{
 	private UploadedFile image; 
 	
     private HttpSession maSession;
+    
+    private List<Produit> prodFiltre;
 
     // Constructeur vide
 	public ProduitManagedBean() {
@@ -76,8 +78,6 @@ public class ProduitManagedBean  implements Serializable{
 	public void setAdmin(Administrateur admin) {
 		this.admin = admin;
 	}
-
-	
 	
 	public UploadedFile getImage() {
 		return image;
@@ -85,6 +85,14 @@ public class ProduitManagedBean  implements Serializable{
 
 	public void setImage(UploadedFile image) {
 		this.image = image;
+	}
+
+	public List<Produit> getProdFiltre() {
+		return prodFiltre;
+	}
+
+	public void setProdFiltre(List<Produit> prodFiltre) {
+		this.prodFiltre = prodFiltre;
 	}
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
