@@ -1,5 +1,7 @@
 package fr.adaming.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +11,12 @@ import fr.adaming.model.Panier;
 
 @Stateless
 public class PanierDaoImpl implements IPanierDao{
+
+	@Override
+	public List<LigneCommande> recProduits() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 //	@PersistenceContext(name="PU_proj")
 //	private EntityManager em;
