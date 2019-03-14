@@ -12,56 +12,52 @@
 
 </h:head>
 <h:body>
-	<h:form>
-		<div class="ui-g">
-			<div class="ui-g-12 ui-md-4">
-				<h2 style="text-align: center">Categories</h2>
-				<p:toolbar id="tb">
-					<f:facet name="left">
-						<p:commandButton value="Ajouter" action="ajoutadmin" />
-						<p:inputText onkeyup="PF('catTable').filter()" />
-					</f:facet>
-				</p:toolbar>
-			</div>
-			<div class="ui-g-12 ui-md-8">
-				<h2 style="text-align: center">Produits</h2>
-				<p:toolbar id="tb1">
-					<f:facet name="left">
-						<p:commandButton value="Ajouter" action="ajoutadmin" />
-						<p:inputText style="margin:1px 10px 1px 1px;"
-							placeholder="Recherche" />
-						<p:commandButton value="Rechercher" />
-						<p:selectOneMenu id="categorieprod" value="#{pMB.categorie.id}"
-							style="width:125px">
-							<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
-							<f:selectItems value="#{sessionScope.cSession}" var="c"
-								itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
-						</p:selectOneMenu>
-					</f:facet>
-				</p:toolbar>
-			</div>
+<h:form>
+	<div class="ui-g">
+		<div class="ui-g-12 ui-md-4">
+			<h2 style="text-align: center">Categories</h2>
+<p:toolbar id="tb">
+		<f:facet name="left">
+				<p:commandButton value="Ajouter" action="ajoutadmin" />
+				<p:inputText style="margin:1px 10px 1px 1px;"
+					placeholder="Recherche" />
+				<p:commandButton value="Rechercher" />
+		</f:facet>
+	</p:toolbar>
 		</div>
+		<div class="ui-g-12 ui-md-8">
+			<h2 style="text-align: center">Produits</h2>
+			<p:toolbar id="tb1">
+		<f:facet name="left">
+				<p:commandButton value="Ajouter" action="ajoutadmin" />
+				<p:inputText style="margin:1px 10px 1px 1px;"
+					placeholder="Recherche" />
+				<p:commandButton value="Rechercher" />
+				<p:selectOneMenu id="categorieprod" value="#{pMB.categorie.id}"
+					style="width:125px">
+					<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+					<f:selectItems value="#{sessionScope.cSession}" var="c"
+						itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
+				</p:selectOneMenu>
+		</f:facet>
+	</p:toolbar>
+		</div>
+	</div>
 
-		<p:sticky target="tb" />
-		<p:sticky target="tb1" />
-	</h:form>
+<p:sticky target="tb" />
+	<p:sticky target="tb1" />
+</h:form>
 
 	<div class="ui-g">
 		<div class="ui-g-12 ui-md-4">
 			<h:form>
-				<p:dataTable var="c" value="#{sessionScope.cSession}" id="idTab"
-					widgetVar="catTable" filteredValue="#{cMB.catFiltre}">
-
-					<f:facet name="header">
-						<p:outputPanel>
-							<p:commandButton value="Ajouter" action="ajoutadmin" />
-							<p:inputText id="globalFilter" onkeyup="PF('catTable').filter()" />
-						</p:outputPanel>
-					</f:facet>
-
-					<p:column headerText="Photo">
-						<h:outputText value="#{c.photo}" />
-					</p:column>
+				<p:dataScroller var="c" value="#{sessionScope.cSession}" id="idTab">
+					<h:panelGrid>
+					
+					
+					
+					
+					</h:panelGrid>
 
 					<p:column headerText="Nom">
 						<h:outputText value="#{c.nom}" />
@@ -82,7 +78,7 @@
 								target="#{eMB.etudiant}" />
 						</p:commandLink>
 					</p:column>
-				</p:dataTable>
+				</p:dataScroller>
 			</h:form>
 		</div>
 

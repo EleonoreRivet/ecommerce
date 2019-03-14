@@ -34,6 +34,8 @@ public class CategorieManagedBean implements Serializable{
 	private UploadedFile image; 
 	
     private HttpSession maSession;
+    
+    private List<Categorie> catFiltre;
 
     // Constructeur
 	public CategorieManagedBean() {
@@ -86,6 +88,14 @@ public class CategorieManagedBean implements Serializable{
 
 	public void setProduit(Produit produit) {
 		this.produit = produit;
+	}
+	
+	public List<Categorie> getCatFiltre() {
+		return catFiltre;
+	}
+
+	public void setCatFiltre(List<Categorie> catFiltre) {
+		this.catFiltre = catFiltre;
 	}
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
