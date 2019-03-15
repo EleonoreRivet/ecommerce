@@ -20,6 +20,11 @@
 		<!-- Pour envoyer directement en Post -->
 		<h:commandButton value="Rechercher" action="#{pMB.recProById}"></h:commandButton>
 	
+			Id: <h:inputText value="#{pMB.categorie.id}" />
+	
+		<!-- Pour envoyer directement en Post -->
+		<h:commandButton value="Rechercher par categorie" action="#{pMB.recProByCat}"></h:commandButton>
+	
 </h:panelGrid>
 </h:form>
 <h1 style="color:red;text-align:center"><h:outputText value="Produit recherché" rendered="#{pMB.indice}"/></h1>

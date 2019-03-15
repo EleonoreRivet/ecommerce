@@ -32,7 +32,8 @@ public class ProduitManagedBean  implements Serializable{
 	private Administrateur admin; 
 	private boolean indice;
 	private UploadedFile image; 
-	
+	private List<Produit> listePro;
+    
     private HttpSession maSession;
     
     private List<Produit> prodFiltre;
@@ -96,15 +97,15 @@ public class ProduitManagedBean  implements Serializable{
 	}
 	
 
-
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
-		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		this.admin= (Administrateur) maSession.getAttribute("adminSession");
+ 	    maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	this.admin= (Administrateur) maSession.getAttribute("adminSession");
 	}
 	
 	
 	//Méthodes métiers
+	
 	public String ajoutPro() {
 		if(this.image!=null){
 			this.produit.setPhoto(this.image.getContents());
@@ -198,6 +199,22 @@ public class ProduitManagedBean  implements Serializable{
 	}
 	
 	
+	public String recProByCat() {
+		//appel de la méthode service
+		List<Produit> lpOut=pService.recProByCat(categorie);
+		if(lpOut!=null) {
+			this.listePro=lpOut; 
+			this.indice=true;
+			return "recherchepro";
+		
+		}else {
+			
+			this.indice=false;
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
+			return "recherchepro";
+		}
+	}
 	
 	
 	
