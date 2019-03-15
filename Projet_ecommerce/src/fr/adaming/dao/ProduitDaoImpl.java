@@ -97,7 +97,14 @@ public class ProduitDaoImpl implements IProduitDao{
 		// Paramètres
 		query.setParameter("pMC", "%"+mc+"%");
 		
-		return query.getResultList();
+		List<Produit> listePro = query.getResultList();
+		
+		for(Produit p:listePro){
+			p.setImg("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
+		}
+		
+		return listePro;
+		
 	}
 
 	@Override
@@ -111,7 +118,14 @@ public class ProduitDaoImpl implements IProduitDao{
 		//Passage des paramètres
 		query.setParameter("pIdc", c.getId());
 		
-		return query.getResultList();
+		List<Produit> listePro = query.getResultList();
+		
+		for(Produit p:listePro){
+			p.setImg("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
+		}
+		
+		return listePro;
+		
 	}
 
 	@Override

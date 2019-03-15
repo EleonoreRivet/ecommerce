@@ -3,11 +3,13 @@ package fr.adaming.managedBeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Administrateur;
 import fr.adaming.model.Categorie;
@@ -30,6 +32,8 @@ public class AministrateurManagedBean implements Serializable {
 
 	// Déclaration des attributs
 	private Administrateur administrateur;
+	private List<Produit> listePro;
+	private List<Produit> filteredPro;
 
 	// Constructeur
 	public AministrateurManagedBean() {
@@ -43,6 +47,32 @@ public class AministrateurManagedBean implements Serializable {
 
 	public void setAdministrateur(Administrateur administrateur) {
 		this.administrateur = administrateur;
+	}
+
+
+
+	public List<Produit> getListePro() {
+		return listePro;
+	}
+
+	public void setListePro(List<Produit> listePro) {
+		this.listePro = listePro;
+	}
+	
+	
+	
+	public List<Produit> getFilteredPro() {
+		return filteredPro;
+	}
+
+	public void setFilteredPro(List<Produit> filteredPro) {
+		this.filteredPro = filteredPro;
+	}
+
+	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
+	public void init(){
+		this.filteredPro=pService.recPro();
+		this.listePro=pService.recPro();
 	}
 
 	// Méthodes métiers

@@ -141,10 +141,12 @@ public class ClientManagedBean implements Serializable {
 	
 	// Méthodes métiers 
 	public String ajoutProduit(){
-		int verif = panService.ajoutProduit(produit, quantite);
-	if(verif!=0) { 
+		LigneCommande liOut = liService.ajoutProduit(produit, quantite);
+	if(liOut.getIdLigne()!=0) { 
 			//Récup de la nouvelle liste
 			List<LigneCommande> listeLico=liService.getListeCo();
+			
+			
 			
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("clientSession", listeLico);

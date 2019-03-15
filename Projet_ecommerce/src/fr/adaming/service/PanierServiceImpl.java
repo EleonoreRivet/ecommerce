@@ -54,4 +54,9 @@ public class PanierServiceImpl implements IPanierService{
 		return total;
 	}
 
+	@Override
+	public int ajoutLico(LigneCommande lico) {
+		return 0;
+	}
+
 }

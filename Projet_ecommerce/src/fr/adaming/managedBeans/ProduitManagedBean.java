@@ -33,6 +33,9 @@ public class ProduitManagedBean  implements Serializable{
 	private boolean indice;
 	private UploadedFile image; 
 	private List<Produit> listePro;
+	private List<Produit> listeProCat;
+	private List<Produit> listeProMC;
+	private String mc; 
     
     private HttpSession maSession;
     
@@ -97,8 +100,45 @@ public class ProduitManagedBean  implements Serializable{
 	}
 	
 
+	public List<Produit> getListePro() {
+		return listePro;
+	}
+
+	public void setListePro(List<Produit> listePro) {
+		this.listePro = listePro;
+	}
+
+	public List<Produit> getListeProCat() {
+		return listeProCat;
+	}
+
+	public void setListeProCat(List<Produit> listeProCat) {
+		this.listeProCat = listeProCat;
+	}
+
+	
+	public String getMc() {
+		return mc;
+	}
+
+	public void setMc(String mc) {
+		this.mc = mc;
+	}
+
+	
+	
+	public List<Produit> getListeProMC() {
+		return listeProMC;
+	}
+
+	public void setListeProMC(List<Produit> listeProMC) {
+		this.listeProMC = listeProMC;
+	}
+
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
+		this.listeProMC=pService.recProByMC(mc);
+		this.listeProCat=pService.recProByCat(categorie);
  	    maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	this.admin= (Administrateur) maSession.getAttribute("adminSession");
 	}
@@ -203,7 +243,7 @@ public class ProduitManagedBean  implements Serializable{
 		//appel de la méthode service
 		List<Produit> lpOut=pService.recProByCat(categorie);
 		if(lpOut!=null) {
-			this.listePro=lpOut; 
+			this.listeProCat=lpOut; 
 			this.indice=true;
 			return "recherchepro";
 		
@@ -214,9 +254,25 @@ public class ProduitManagedBean  implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
 			return "recherchepro";
 		}
-	}
+}
 	
-	
-	
+	public String recProByMC() {
+		//appel de la méthode service
+		List<Produit> lpOut=pService.recProByMC(mc);
+		if(lpOut!=null) {
+			this.listeProMC=lpOut; 
+			this.indice=true;
+			return "recherchepro";
+		
+		}else {
+			
+			this.indice=false;
+			//Ajouter un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
+			return "recherchepro";
+		}
+}
+
+
 	
 }
