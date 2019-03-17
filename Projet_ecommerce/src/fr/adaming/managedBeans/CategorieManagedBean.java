@@ -32,6 +32,7 @@ public class CategorieManagedBean implements Serializable{
 	private Administrateur admin; 
 	private boolean indice;
 	private UploadedFile image; 
+	private List<Categorie> listeCat; 
 	
     private HttpSession maSession;
     
@@ -97,9 +98,19 @@ public class CategorieManagedBean implements Serializable{
 	public void setCatFiltre(List<Categorie> catFiltre) {
 		this.catFiltre = catFiltre;
 	}
+	
+
+	public List<Categorie> getListeCat() {
+		return listeCat;
+	}
+
+	public void setListeCat(List<Categorie> listeCat) {
+		this.listeCat = listeCat;
+	}
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
+		this.listeCat = cService.recCat();
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.admin= (Administrateur) maSession.getAttribute("adminSession");
 	}
@@ -122,7 +133,7 @@ public class CategorieManagedBean implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("cSession", listeCat);
 			
-			return "espaceadmin"; 
+			return "listecat"; 
 		}else {
 			
 			//Ajouter un message d'erreur
@@ -143,12 +154,12 @@ public class CategorieManagedBean implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("cSession", listeCat);
 			
-			return "espaceadmin"; 
+			return "listecat"; 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification a échoué"));
-			return "espaceadmin";
+			return "listecat";
 		}	
 	}
 	
@@ -167,12 +178,12 @@ public class CategorieManagedBean implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("cSession", listeCat);
 			
-			return "espaceadmin"; 
+			return "listecat"; 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué"));
-			return "espaceadmin";
+			return "listecat";
 		}	
 	}
 	
@@ -182,14 +193,14 @@ public class CategorieManagedBean implements Serializable{
 		if(cOut!=null) {
 			this.categorie=cOut; 
 			this.indice=true;
-			return "recherche";
+			return "recherchecat";
 		
 		}else {
 			
 			this.indice=false;
 			//Ajouter un message d'erreur
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie n'a pas été trouvé"));
-			return "recherche";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie n'a pas été trouvée"));
+			return "recherchecat";
 		}
 	}
 	

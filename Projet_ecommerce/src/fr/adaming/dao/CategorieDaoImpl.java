@@ -41,7 +41,7 @@ public class CategorieDaoImpl implements ICategorieDao{
 	public int modifCat(Categorie c) {
 		// Requête JPQL
 		
-		String req = "UPDATE Categorie as c SET c.nom=:pNom, c.description=:pDesc, c.img=:pPhoto WHERE c.id=:pId";
+		String req = "UPDATE Categorie as c SET c.nom=:pNom, c.description=:pDesc WHERE c.id=:pId";
 		
 		//Récupérer un objet de type Query
 		Query query=em.createQuery(req);		
@@ -50,7 +50,6 @@ public class CategorieDaoImpl implements ICategorieDao{
 		query.setParameter("pId", c.getId());
 		query.setParameter("pNom", c.getNom());
 		query.setParameter("pDesc", c.getDescription());
-		query.setParameter("pPhoto", c.getImg());
 		
 		return query.executeUpdate();
 	}

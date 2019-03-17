@@ -8,4 +8,6 @@ import fr.adaming.model.Produit;
 public interface ILigneCommandeService {
 	public LigneCommande ajoutProduit(Produit p, int qte);
 	public List<LigneCommande> getListeCo();
+	public LigneCommande getLigneCoByPro(Produit p);
+	public int supprProduit(Produit p);
 }

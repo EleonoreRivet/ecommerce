@@ -24,7 +24,7 @@
   
   <!-- Page d'accueil -->
   <welcome-file-list>
-  <welcome-file>accueil.xhtml</welcome-file>
+  <welcome-file>testclient.xhtml</welcome-file>
   </welcome-file-list>
   
 </web-app>

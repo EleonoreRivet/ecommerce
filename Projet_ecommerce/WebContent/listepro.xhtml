@@ -1,16 +1,19 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
-	
+
+
 <h:head>
-<title>Recherche Produit</title>
+	<title>Facelet Produits</title>
 </h:head>
+
 <h:body>
+
 <!-- CSS -->
  	<h:outputStylesheet library="css" name="monStyle.css"/>
  	
@@ -33,28 +36,20 @@
 </div>
 	 </div>
  <!-- CENTRE -->
-  <div class="ui-grid-col-6 ui-g-12 ui-md-6 ui-lg-6">
-<h1>Rechercher un produit</h1>
-
-<div class="box_resum">
+  <div class="ui-grid-col-9 ui-g-12 ui-md-9 ui-lg-9">
+<img src="https://www.animaatjes.nl/plaatjes/b/bomen/animaatjes-bomen-94872.gif" style="width:100px;margin-bottom:-85px;"/>
+<h1>Liste des produits</h1>
      <p:messages />
-<h:form id="idForm">
-<h:panelGrid  columns="3" styleClass="panelGridCenter">
-<!-- Recherche par ID -->
-	     
-        <p:selectOneMenu id="produit" value="#{pMB.produit.id}" style="width:125px">
-            <f:selectItem itemLabel="Selectionner un produit" itemValue="" />
-           <f:selectItems value="#{sessionScope.pSession}" var="p" itemValue="#{p.id}" itemLabel="#{p.id}. #{p.designation}"/>
-        </p:selectOneMenu>
-        <h:commandButton value="Rechercher" action="#{pMB.recProById}"></h:commandButton>
-	
-</h:panelGrid>
-</h:form>
-</div>
-<br/>
-<h1 style="color:red;text-align:center"><h:outputText value="Produit recherché" rendered="#{pMB.indice}"/></h1>
-<p:dataTable var="p" value="#{pMB.produit}" rendered="#{pMB.indice}" reflow="true">
-						<p:column headerText="ID">
+	<h:form>
+											<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="explode">
+								<p:commandButton value="Oui" styleClass="ui-confirmdialog-yes"
+									icon="ui-icon-check" />
+								<p:commandButton value="Non" styleClass="ui-confirmdialog-no"
+									icon="ui-icon-close" />
+							</p:confirmDialog>
+					<p:dataTable var="p" value="#{sessionScope.pSession}" id="idTab" reflow="true">
+					<p:column headerText="ID">
 						<h:outputText value="#{p.id}" />
 					</p:column>
 
@@ -81,12 +76,32 @@
 					<p:column headerText="Quantité">
 						<h:outputText value="#{p.quantite}" />
 					</p:column>
-</p:dataTable>
 
-	<!-- Fin Centre -->
+
+			<p:column headerText="Opérations">
+							<p:commandLink action="#{pMB.supprPro}">
+				<h:graphicImage library="images" name="Close.png" />
+				<p:confirm header="Confirmation" message="Etes-vous sûr ?" />
+					<f:setPropertyActionListener value="#{p.id}"
+						target="#{pMB.produit.id}" />
+				</p:commandLink> | 
+				<p:commandLink action="modifpro">
+				<h:graphicImage library="images" name="Info.png" />
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pMB.produit}" />
+				</p:commandLink> 
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+
+
+			<!-- Fin Centre -->
 	    </div>
 	    
 	    </div>
-	
+
+
+
 </h:body>
 </html>

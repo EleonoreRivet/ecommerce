@@ -91,7 +91,7 @@ public class AministrateurManagedBean implements Serializable {
 			//Mettre l'admin dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
 			
-			return "espaceadmin";
+			return "accueil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Mot de passe et/ou login est erroné"));
 			return "login";
@@ -108,7 +108,7 @@ public class AministrateurManagedBean implements Serializable {
 			return "login";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Impossible de se déconnecter"));
-			return "espaceadmin";
+			return "accueil";
 
 		}
 	

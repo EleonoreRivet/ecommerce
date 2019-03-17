@@ -10,18 +10,43 @@
 <title>Panier</title>
 </h:head>
 <h:body>
-<a href="testaccueil.xhtml">Accueil test</a>
-<br/>
+<!-- CSS -->
+ 	<h:outputStylesheet library="css" name="monStyle.css"/>
+ 	
+ 	<!-- HEADER -->
+ 	
+ 	<ui:insert name="header"> 
+<ui:include src="/header.xhtml"/>
+</ui:insert>
+<br/><br/>
 
-	<h3>Cart Info</h3>
+
+
+<div class="ui-grid ui-grid-responsive">
+<div class="ui-grid-col-3 ui-g-12 ui-md-6 ui-lg-2">
+</div>
+ <!-- CENTRE -->
+  <div class="ui-grid-col-6 ui-g-12 ui-md-6 ui-lg-9">
+<br/>
+<h:form>
+  <p:breadCrumb>
+    <p:menuitem value="Categories" url="testclient.xhtml" />
+
+    <p:menuitem value="Panier" url="panier.xhtml" />
+ 
+</p:breadCrumb>
+</h:form>
+<br/>
+<h1>Votre panier</h1>
+     <p:messages />
 					<h:form>
-				<p:dataTable var="li" value="#{panMB.listeLico}" id="idTab">
+				<p:dataTable var="li" value="#{sessionScope.lsession}" id="idTab">
 					<p:column headerText="ID">
 						<h:outputText value="#{li.produit.id}" />
 					</p:column>
 
 					<p:column headerText="Photo">
-						<h:graphicImage value="#{li.produit.img}" />
+						<h:graphicImage value="#{li.produit.img}" style="width:50%"/>
 					</p:column>
 
 					<p:column headerText="Designation">
@@ -37,7 +62,7 @@
 					</p:column>
 
 					<p:column headerText="Prix">
-						<h:outputText value="#{li.prix}" />
+						<h:outputText value="#{li.produit.prix * li.quantite}" />
 					</p:column>
 
 					<p:column headerText="Quantité">
@@ -45,19 +70,17 @@
 					</p:column>
 
 					<p:column headerText="Opérations">
-						<p:commandLink value="Supprimer"
-							update="idTab">
-							<f:setPropertyActionListener value="#{p.id}"
-								target="#{pMB.produit.id}" />
-						</p:commandLink> | 
-				<p:commandLink value="Modifier" action="modifpro">
-							<f:setPropertyActionListener value="#{p}"
-								target="#{pMB.produit}" />
-						</p:commandLink>
+					<p:commandLink value="Supprimer" action="#{panMB.supprPanier}" update="idTab">
+					<f:setPropertyActionListener value="#{li.produit.id}"
+						target="#{panMB.produit.id}" />
+				</p:commandLink>
 					</p:column>
 				</p:dataTable>
 		<br></br>
-		<h:commandLink value="Continue Shopping" action="#{clMB.enregistrerCo}"></h:commandLink>
+		
 	</h:form>
+	
+	
+	</div></div>
 </h:body>
 </html>

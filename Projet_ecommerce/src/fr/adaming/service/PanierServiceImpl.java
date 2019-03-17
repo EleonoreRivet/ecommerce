@@ -1,7 +1,9 @@
 package fr.adaming.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateful;
 
@@ -11,7 +13,8 @@ import fr.adaming.model.Produit;
 @Stateful
 public class PanierServiceImpl implements IPanierService{
 
-	List<LigneCommande> articles = new ArrayList<LigneCommande>();
+	//List<LigneCommande> articles = new ArrayList<LigneCommande>();
+    Map<Integer, LigneCommande> articles = new HashMap<Integer, LigneCommande>();
 	
 	@Override
 	public int ajoutProduit(Produit p, int quantite) {
@@ -20,8 +23,8 @@ public class PanierServiceImpl implements IPanierService{
 			LigneCommande lcOut = new LigneCommande();
 			lcOut.setProduit(p);
 			lcOut.setQuantite(quantite);
-			lcOut.setPrix(p.getPrix());
-			articles.add(p.getId(), lcOut);
+			lcOut.setPrix(p.getPrix()*quantite);
+			articles.put(p.getId(), lcOut);
 		}else{
 			lc.setQuantite(lc.getQuantite()+quantite);
 		}
@@ -36,7 +39,7 @@ public class PanierServiceImpl implements IPanierService{
 
 	@Override
 	public List<LigneCommande> recProduits() {
-		return articles;
+		return null;
 	// A REVOIR 
 	}
 
@@ -48,7 +51,7 @@ public class PanierServiceImpl implements IPanierService{
 	@Override
 	public double getTotal() {
 		double total=0;
-		for(LigneCommande lc:articles){
+		for(LigneCommande lc:articles.values()){
 			total=lc.getPrix()*lc.getQuantite();
 		}
 		return total;
@@ -56,7 +59,9 @@ public class PanierServiceImpl implements IPanierService{
 
 	@Override
 	public int ajoutLico(LigneCommande lico) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

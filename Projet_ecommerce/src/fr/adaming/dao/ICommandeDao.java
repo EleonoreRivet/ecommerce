@@ -13,3 +13,4 @@ public interface ICommandeDao {
 	public Commande enregistrerCom(Panier pan, Client c, Adresse a);
 	
 }
+ 

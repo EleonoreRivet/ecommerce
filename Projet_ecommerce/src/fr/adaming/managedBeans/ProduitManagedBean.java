@@ -137,6 +137,7 @@ public class ProduitManagedBean  implements Serializable{
 
 	@PostConstruct //Cette annotation sert à dire que la méthode doit être exécutée après l'instanciation de l'objet
 	public void init(){
+		this.listePro = pService.recPro();
 		this.listeProMC=pService.recProByMC(mc);
 		this.listeProCat=pService.recProByCat(categorie);
  	    maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -243,16 +244,16 @@ public class ProduitManagedBean  implements Serializable{
 		//appel de la méthode service
 		List<Produit> lpOut=pService.recProByCat(categorie);
 		if(lpOut!=null) {
-			this.listeProCat=lpOut; 
+			this.listePro=lpOut; 
 			this.indice=true;
-			return "recherchepro";
+			return "testclient";
 		
 		}else {
 			
 			this.indice=false;
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
-			return "recherchepro";
+			return "testclient";
 		}
 }
 	
@@ -260,16 +261,16 @@ public class ProduitManagedBean  implements Serializable{
 		//appel de la méthode service
 		List<Produit> lpOut=pService.recProByMC(mc);
 		if(lpOut!=null) {
-			this.listeProMC=lpOut; 
+			this.listePro=lpOut; 
 			this.indice=true;
-			return "recherchepro";
+			return "testclient";
 		
 		}else {
 			
 			this.indice=false;
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été trouvé"));
-			return "recherchepro";
+			return "testclient";
 		}
 }
 

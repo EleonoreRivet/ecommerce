@@ -43,7 +43,7 @@ public class ProduitDaoImpl implements IProduitDao{
 	public int modifPro(Produit p) {
 		// Requête JPQL
 		
-		String req = "UPDATE Produit as p SET p.categorie.id=:pCat, p.designation=:pDes, p.description=:pDesc, p.prix=:pPrix, p.quantite=:pQuantite, p.photo=:pPhoto WHERE p.id=:pId";
+		String req = "UPDATE Produit as p SET p.categorie.id=:pCat, p.designation=:pDes, p.description=:pDesc, p.prix=:pPrix, p.quantite=:pQuantite WHERE p.id=:pId";
 		
 		//Récupérer un objet de type Query
 		Query query=em.createQuery(req);		
@@ -54,7 +54,6 @@ public class ProduitDaoImpl implements IProduitDao{
 		query.setParameter("pDesc", p.getDescription());
 		query.setParameter("pPrix", p.getPrix());
 		query.setParameter("pQuantite", p.getQuantite());
-		query.setParameter("pPhoto", p.getPhoto());
 		query.setParameter("pCat", p.getCategorie().getId());
 		
 		return query.executeUpdate();

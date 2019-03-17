@@ -1,5 +1,9 @@
 package fr.adaming.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,8 +24,11 @@ public class CommandeDaoImpl implements ICommandeDao{
 		c.setAdresse(a);
 		em.persist(c);
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
 		// Enregistrer la commande
 		Commande com = new Commande();
+		com.setDate(date);
 		com.setClient(c);
 		com.setListelico(pan.getListelico());
 		em.persist(com);

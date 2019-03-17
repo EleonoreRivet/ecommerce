@@ -31,17 +31,10 @@
 <h:body>
 <a href="panier.xhtml">Panier</a>
 <br/>
-		
+		<h1 style="color: blue;text-align: center;"> <h:messages/></h1>
 			<h:form>
-    <p:dataTable var="p"  id="idTab" value="#{aMB.listePro}" widgetVar="produits"
-                 emptyMessage="No cars found with given criteria" filteredValue="#{pMB.listeProMC}">
- 
-        <f:facet name="header">
-            <p:outputPanel>
-                <h:outputText value="Search all fields:" />
-                <p:inputText id="globalFilter" onkeyup="PF('produits').filter()" style="width:150px" placeholder="Enter keyword"/>
-            </p:outputPanel>
-        </f:facet>
+    <p:dataTable var="p"  id="idTab" value="#{aMB.listePro}">
+
 					<p:column headerText="ID">
 						<h:outputText value="#{p.id}" />
 					</p:column>
@@ -63,19 +56,19 @@
 					</p:column>
 
 					<p:column headerText="Prix">
-						<h:outputText value="#{p.prix}" />
+						<h:outputText value="#{panMB.prix}" />
 					</p:column>
 
 					<p:column headerText="Quantité">
-					<p:inputText value="#{clMB.quantite}" />
+					  <p:inputNumber id="input1" value="#{panMB.quantite}" />
 					</p:column>
 
 					<p:column headerText="Opérations">
-						<h:commandButton value="Ajouter au panier"
-						action="#{clMB.ajoutProduit}" styleClass="bouton">
+						<p:commandLink value="Ajouter au panier"
+						action="#{panMB.panier}" styleClass="bouton">
 						<f:setPropertyActionListener value="#{p.id}"
-								target="#{pMB.produit.id}" />
-						</h:commandButton>
+								target="#{panMB.produit.id}" />
+						</p:commandLink>
 						| <p:commandLink value="Supprimer"
 							update="idTab">
 							<f:setPropertyActionListener value="#{p.id}"

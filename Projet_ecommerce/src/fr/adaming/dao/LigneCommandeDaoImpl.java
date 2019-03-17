@@ -23,16 +23,29 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 		LigneCommande lc=new LigneCommande();
 		
 		//ajout du produit
-		lc.setProduit(p);
-		
+		lc.setProduit(p);	
 		lc.setQuantite(qte);
 		
 		//calcul du prix
-		lc.setPrix(p.getPrix()*qte);
+		lc.setPrix(p.getPrix() * qte);
 		
 		em.persist(lc);
 		
 		return lc;
+	}
+	
+	public int supprProduit(Produit p){
+		// Requête JPQL
+
+				String req = "DELETE FROM LigneCommande as l WHERE l.produit.id=:pId";
+				
+				//Récupérer un objet de type Query
+				Query query=em.createQuery(req);		
+				
+				//Passage des paramètres
+				query.setParameter("pId", p.getId());
+				
+				return query.executeUpdate();
 	}
 
 	@Override
@@ -45,8 +58,28 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 
 			List<LigneCommande> listeLico = query.getResultList();
 			
+			for(LigneCommande l:listeLico){
+				l.getProduit().setImg("data:image/png;base64,"+Base64.encodeBase64String(l.getProduit().getPhoto()));
+			}
+			
+			
 			return listeLico;
 		}
+	
+	public LigneCommande getLigneCoByPro(Produit p){
+		// Requête JPQL
+		String req="SELECT l FROM LigneCommande as l WHERE l.produit.id=:pIdp"; 
+		
+		//Récupérer un objet de type Query
+		Query query=em.createQuery(req);		
+		
+		//Passage des paramètres
+		query.setParameter("pIdp", p.getId());
+		
+		LigneCommande lOut= (LigneCommande) query.getSingleResult();
+		
+		return lOut;
+	}
 	}
 	
 

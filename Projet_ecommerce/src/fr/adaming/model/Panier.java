@@ -26,5 +26,7 @@ public class Panier implements Serializable{
 	public void setListelico(List<LigneCommande> listelico) {
 		this.listelico = listelico;
 	}
+	
+	
 
 }

@@ -25,4 +25,15 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 		return lcDao.getListeCo();
 	}
 
+	@Override
+	public LigneCommande getLigneCoByPro(Produit p) {
+		return lcDao.getLigneCoByPro(p);
+	}
+
+	@Override
+	public int supprProduit(Produit p) {
+		// TODO Auto-generated method stub
+		return lcDao.supprProduit(p);
+	}
+
 }

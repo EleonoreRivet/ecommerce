@@ -33,12 +33,13 @@
 				<p:inputText style="margin:1px 10px 1px 1px;"
 					placeholder="Recherche" />
 				<p:commandButton value="Rechercher" />
-				<p:selectOneMenu id="categorieprod" value="#{pMB.categorie.id}"
-					style="width:125px">
-					<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
-					<f:selectItems value="#{sessionScope.cSession}" var="c"
-						itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
-				</p:selectOneMenu>
+				<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
+						style="width:125px">
+						<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+				    		<f:selectItems value="#{cMB.listeCat}" var="c"
+							itemValue="#{c.id}" itemLabel="#{c.nom}" />
+							 <p:ajax event="valueChange" listener="#{pMB.recProByCat}" update="form"/>
+					</p:selectOneMenu>
 		</f:facet>
 	</p:toolbar>
 		</div>
@@ -83,7 +84,7 @@
 		</div>
 
 		<div class="ui-g-12 ui-md-8">
-			<h:form>
+			<h:form id="form">
 				<p:dataTable var="p" value="#{sessionScope.pSession}" id="idTab">
 					<p:column headerText="Photo">
 						<h:graphicImage value="#{p.img}" />

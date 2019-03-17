@@ -7,13 +7,14 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 <h:head>
-<title>Modifier Produits</title>
+	<title>Facelet ajout</title>
 </h:head>
+
 <h:body>
 <!-- CSS -->
  	<h:outputStylesheet library="css" name="monStyle.css"/>
  	
-	<!-- HEADER -->
+ 	<!-- HEADER -->
  	
  	<ui:insert name="header"> 
 <ui:include src="/header.xhtml"/>
@@ -33,50 +34,49 @@
 	 </div>
  <!-- CENTRE -->
   <div class="ui-grid-col-6 ui-g-12 ui-md-6 ui-lg-6">
-<h1>Modifier un produit</h1>
+<img src="http://bestanimations.com/Animals/Birds/Parrots/animated-parrot-gif-2.gif" style="width:100px;margin-bottom:-90px;"/>
+<h1>Formulaire d'ajout de produit</h1>
 
 <div class="box_resum">
      <p:messages />
-<h:form id="idForm" enctype="multipart/form-data">
-<h:panelGrid columns="2" styleClass="panelGridCenter">
-				
-						        <p:outputLabel for="produit" value="ID:" />
-        <p:selectOneMenu id="produit" value="#{pMB.produit.id}" style="width:125px">
-        <p:ajax event="valueChange" listener="#{pMB.modifAuto}" update="idForm"/>
-            <f:selectItem itemLabel="Selectionner un produit" itemValue="" />
-           <f:selectItems value="#{sessionScope.pSession}" var="p" itemValue="#{p.id}" itemLabel="#{p.id}.Produit #{p.designation}"/>
-        </p:selectOneMenu>
+<h:form enctype="multipart/form-data">
+<h:panelGrid  columns="3" styleClass="panelGridCenter">
+	
 					<p:outputLabel value="Designation:" />
 					<h:inputText value="#{pMB.produit.designation}" required="true" />
-				
+					<br />
 					<p:outputLabel value="Description:" />
-					<h:inputText value="#{pMB.produit.description}" required="true" />
-					
+					<h:inputTextarea rows="3" cols="25" value="#{pMB.produit.description}" required="true" />
+					<br />
 					<p:outputLabel value="Categorie:" />
 					<p:selectOneMenu id="categorie" value="#{pMB.categorie.id}"
 						style="width:125px">
 						<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
-				    		<f:selectItems value="#{sessionScope.cSession}" var="c"
+						<f:selectItems value="#{sessionScope.cSession}" var="c"
 							itemValue="#{c.id}" itemLabel="#{c.id}.Catégorie #{c.nom}" />
 					</p:selectOneMenu>
-					
+					<br />
 					<p:outputLabel value="Prix:" />
 					<h:inputText value="#{pMB.produit.prix}" />
-					
+					<br />
 					<p:outputLabel value="Quantité:" />
 					<h:inputText value="#{pMB.produit.quantite}" />
 					<br />
+					<p:outputLabel value="Photo:" />
+					<p:fileUpload value="#{pMB.image}" mode="simple" skinSimple="true" />
 					<br />
-					<h:commandButton value="Modifier un produit"
-						action="#{pMB.modifPro}" styleClass="bouton" />
-	</h:panelGrid>
+					<br />
+					<h:commandButton value="Ajouter un produit"
+						action="#{pMB.ajoutPro}" styleClass="bouton" />
+				</h:panelGrid>
 			</h:form>
-			
-</div>
-
+		
+	</div>
 			<!-- Fin Centre -->
 	    </div>
 	    
 	    </div>
+
+
 </h:body>
 </html>
