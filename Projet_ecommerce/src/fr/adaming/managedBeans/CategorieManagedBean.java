@@ -138,7 +138,7 @@ public class CategorieManagedBean implements Serializable{
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
-			return "ajoutadmin";
+			return "ajoutcat";
 		}
 		
 	}

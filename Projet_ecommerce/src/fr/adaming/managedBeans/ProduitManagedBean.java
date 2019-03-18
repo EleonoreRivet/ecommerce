@@ -164,14 +164,14 @@ public class ProduitManagedBean  implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("pSession", listePro);
 			
-			return "espaceadmin";
+			return "listepro";
 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
 			
-			return "ajoutadmin";
+			return "ajoutpro";
 			
 		}
 		
@@ -189,12 +189,12 @@ public class ProduitManagedBean  implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("pSession", listePro);
 			
-			return "espaceadmin"; 
+			return "listepro"; 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification a échoué"));
-			return "espaceadmin";
+			return "modifpro";
 		}	
 	}
 	
@@ -213,12 +213,12 @@ public class ProduitManagedBean  implements Serializable{
 			//Mettre à jour la liste dans la session
 			maSession.setAttribute("pSession", listePro);
 			
-			return "espaceadmin"; 
+			return "listepro"; 
 		}else {
 			
 			//Ajouter un message d'erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué"));
-			return "espaceadmin";
+			return "listepro";
 		}	
 	}
 	
